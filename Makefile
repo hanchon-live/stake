@@ -1,7 +1,10 @@
 .PHONY: stake
 
 dev:
-	@air
+	@source /opt/homebrew/opt/nvm/nvm.sh && nvm use v20.10.0 && air
+
+lint:
+	@templ fmt .
 
 build:
 	@go build -o ./build/

@@ -1,0 +1,10 @@
+{
+  "name": "stake",
+  "scripts": {
+    "css": "tailwindcss -i ./assets/app.css -o ./public/assets/app.css"
+  },
+  "devDependencies": {
+    "daisyui": "^3.1.7",
+    "tailwindcss": "3.3.2"
+  }
+}
