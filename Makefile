@@ -7,4 +7,4 @@ lint:
 	@templ fmt .
 
 build:
-	@go build -o ./build/
+	@./build.sh
