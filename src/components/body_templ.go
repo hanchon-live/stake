@@ -29,7 +29,7 @@ func Body() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col h-full w-full bg-red-50\"><div class=\"mx-auto my-auto\"><span>Body Here</span></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col h-full w-full bg-red-50\"><div class=\"mx-auto my-auto\"><span>Body Here</span> <button onclick=\"alert(window.stake.sum(1,2));\">Click me</button></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -10,6 +10,7 @@ import (
 
 const (
 	secret_key string = "cookie-key"
+	port       string = "3000"
 )
 
 func main() {
@@ -24,5 +25,5 @@ func main() {
 		return component.Render(c.Request().Context(), c.Response().Writer)
 	})
 
-	server.Logger.Fatal(server.Start(":3000"))
+	server.Logger.Fatal(server.Start(":" + port))
 }

@@ -1,4 +1,6 @@
 build
 tmp
+dist
 node_modules
 public/assets/generated/*
+public/tsconfig.build.tsbuildinfo
