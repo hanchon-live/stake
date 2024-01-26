@@ -8,7 +8,7 @@ templ Layout() {
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 			<script src="/public/assets/js/index.js"></script>
 		</head>
-		<body>
+		<body onload="a=[];window.stake.onPageLoad(a);">
 			<main class="flex flex-col w-screen h-screen">
 				<div class="flex w-screen h-14 bg-black px-4">
 					@Wallet()
@@ -17,27 +17,4 @@ templ Layout() {
 			</main>
 		</body>
 	</html>
-}
-
-templ Wallet() {
-	<script>
-        async function getMetamaskAddress() {
-          try {
-            const accounts = await window.ethereum.request({
-              method: "eth_requestAccounts",
-            });
-            document.getElementById("address").innerHTML=accounts[0];
-          } catch (e) {
-            document.getElementById("address").innerHTML="";
-          }
-        }
-    </script>
-	<div class="flex flex-row space-x-2 w-full my-auto justify-end">
-		<div class="bg-gray-100 text-black text-xl rounded-xl px-4 py-1">
-			<span id="address">
-				0x...
-			</span>
-		</div>
-		<button class="text-white" type="button" onclick="getMetamaskAddress()">GetWallet</button>
-	</div>
 }

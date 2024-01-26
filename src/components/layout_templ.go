@@ -23,7 +23,7 @@ func Layout() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><title>Stake</title><link rel=\"stylesheet\" href=\"/public/assets/css/app-22735.css\"><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><script src=\"/public/assets/js/index-22735.js\"></script></head><body><main class=\"flex flex-col w-screen h-screen\"><div class=\"flex w-screen h-14 bg-black px-4\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><title>Stake</title><link rel=\"stylesheet\" href=\"/public/assets/css/app-30893.css\"><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><script src=\"/public/assets/js/index-30893.js\"></script></head><body onload=\"a=[];window.stake.onPageLoad(a);\"><main class=\"flex flex-col w-screen h-screen\"><div class=\"flex w-screen h-14 bg-black px-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -40,30 +40,6 @@ func Layout() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</main></body></html>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		if !templ_7745c5c3_IsBuffer {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
-		}
-		return templ_7745c5c3_Err
-	})
-}
-
-func Wallet() templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-		if !templ_7745c5c3_IsBuffer {
-			templ_7745c5c3_Buffer = templ.GetBuffer()
-			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var2 == nil {
-			templ_7745c5c3_Var2 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        async function getMetamaskAddress() {\n          try {\n            const accounts = await window.ethereum.request({\n              method: \"eth_requestAccounts\",\n            });\n            document.getElementById(\"address\").innerHTML=accounts[0];\n          } catch (e) {\n            document.getElementById(\"address\").innerHTML=\"\";\n          }\n        }\n    </script><div class=\"flex flex-row space-x-2 w-full my-auto justify-end\"><div class=\"bg-gray-100 text-black text-xl rounded-xl px-4 py-1\"><span id=\"address\">0x...</span></div><button class=\"text-white\" type=\"button\" onclick=\"getMetamaskAddress()\">GetWallet</button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
