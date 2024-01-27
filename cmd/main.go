@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gorilla/sessions"
 	"github.com/hanchon-live/stake/src/components"
 	"github.com/labstack/echo-contrib/session"
@@ -23,6 +25,10 @@ func main() {
 	server.GET("/", func(c echo.Context) error {
 		component := components.Body()
 		return component.Render(c.Request().Context(), c.Response().Writer)
+	})
+
+	server.POST("/wallets", func(c echo.Context) error {
+		return c.String(http.StatusOK, "<div><p>Wallet1</p><p>Wallet2</p></div>")
 	})
 
 	server.Logger.Fatal(server.Start(":" + port))

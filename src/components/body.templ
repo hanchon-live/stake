@@ -5,7 +5,15 @@ templ Body() {
 		<div class="flex flex-col h-full w-full bg-red-50">
 			<div class="mx-auto my-auto">
 				<span>Body Here</span>
-				<button onclick="window.stake.onPageLoad">Click me</button>
+				<button id="wallets" hx-post="/wallets" hx-swap="innerHTML" hx-target="#walletslist" hx-trigger="EIP6963">
+					Test
+				</button>
+				<div>
+					<div>Wallets</div>
+					<div id="walletslist">
+						Empty
+					</div>
+				</div>
 			</div>
 		</div>
 	}
