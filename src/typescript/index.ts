@@ -10,10 +10,29 @@ declare global {
   }
 }
 
+export async function getAddress() {
+  const p = getProvider();
+  if (p != undefined) {
+    let accounts = await p.request({
+      method: "eth_requestAccounts",
+    });
+    return accounts;
+  }
+  return [];
+}
+
 export function onPageLoad() {
   registerEIP6963(providers);
-  console.log(providers);
-  window.htmx.trigger("#wallets", "EIP6963", {});
+  // TODO: move this to one second after page loads
+  const walletNames = [];
+  for (let i = 0; i < providers.length; ++i) {
+    walletNames.push(providers[i].info.name);
+  }
+  window.htmx.ajax("POST", "/wallets", {
+    target: "#walletslist",
+    swap: "innerHTML",
+    values: { providers: walletNames },
+  });
 }
 
 export function setProviderByUUID(uuid: string) {
@@ -29,15 +48,12 @@ export function getProvider() {
 }
 
 export function getProviders() {
-  console.log(providers);
   return providers;
 }
 
 function findProviderByUUID(uuid: string) {
-  console.log(uuid);
   for (let i = 0; i < providers.length; i++) {
     if (providers[i].info.uuid === uuid) {
-      console.log(providers[i].info.uuid);
       return providers[i].provider;
     }
   }
@@ -47,7 +63,6 @@ function findProviderByUUID(uuid: string) {
 function findProviderByName(name: string) {
   for (let i = 0; i < providers.length; i++) {
     if (providers[i].info.name === name) {
-      console.log(providers[i].info.name);
       return providers[i].provider;
     }
   }

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"net/http"
+	"fmt"
 
 	"github.com/gorilla/sessions"
 	"github.com/hanchon-live/stake/src/components"
+	"github.com/hanchon-live/stake/src/components/wallet"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -28,7 +29,13 @@ func main() {
 	})
 
 	server.POST("/wallets", func(c echo.Context) error {
-		return c.String(http.StatusOK, "<div><p>Wallet1</p><p>Wallet2</p></div>")
+		fmt.Println("--------")
+		c.Request().ParseForm()
+		providers, ok := c.Request().Form["providers"]
+		if !ok {
+			providers = []string{}
+		}
+		return wallet.WalletList(providers).Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	server.Logger.Fatal(server.Start(":" + port))
