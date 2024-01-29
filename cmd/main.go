@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/gorilla/sessions"
 	"github.com/hanchon-live/stake/src/components"
@@ -36,6 +37,17 @@ func main() {
 			providers = []string{}
 		}
 		return wallet.WalletList(providers).Render(c.Request().Context(), c.Response().Writer)
+	})
+
+	server.POST("/currentwallet", func(c echo.Context) error {
+		c.Request().ParseForm()
+		account, ok := c.Request().Form["accounts"]
+		fmt.Println(account)
+		value := "0x..."
+		if ok && len(account) > 0 {
+			value = account[0]
+		}
+		return c.String(http.StatusOK, value)
 	})
 
 	server.Logger.Fatal(server.Start(":" + port))

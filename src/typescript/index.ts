@@ -11,14 +11,21 @@ declare global {
 }
 
 export async function getAddress() {
+  let accounts: string[] = [];
   const p = getProvider();
   if (p != undefined) {
-    let accounts = await p.request({
+    accounts = (await p.request({
       method: "eth_requestAccounts",
-    });
-    return accounts;
+    })) as string[];
   }
-  return [];
+
+  window.htmx.ajax("POST", "/currentwallet", {
+    target: "#currentwallet",
+    swap: "innerHTML",
+    values: { accounts: accounts },
+  });
+
+  return accounts;
 }
 
 export function onPageLoad() {

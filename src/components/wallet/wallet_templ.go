@@ -23,7 +23,7 @@ func WalletConnector() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col h-full w-full bg-red-50\"><div class=\"mx-auto my-auto\"><div><div>Wallets</div><div id=\"walletslist\">Empty</div></div></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col h-full w-full bg-red-50\"><div class=\"mx-auto my-auto\"><div><div>Wallets</div><div id=\"walletslist\">Empty</div><div>Current Wallet</div><div id=\"currentwallet\">0x...</div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -83,7 +83,7 @@ func WalletList(providers []string) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(templ.EscapeString(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/components/wallet/wallet.templ`, Line: 24, Col: 27}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/components/wallet/wallet.templ`, Line: 26, Col: 27}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
