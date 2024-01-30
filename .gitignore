@@ -5,3 +5,4 @@ node_modules
 public/assets/css/*
 public/assets/js/*
 public/tsconfig.build.tsbuildinfo
+.env

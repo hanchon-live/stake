@@ -6,5 +6,8 @@ dev:
 lint:
 	@templ fmt .
 
+test:
+	@godotenv -f .env go test -v ./...
+
 build:
 	@./build.sh
