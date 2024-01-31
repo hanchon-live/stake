@@ -1,12 +1,17 @@
 package main
 
 import (
+	// TODO: load the env file instead of auto importing it
+	// Autoload the .env file, must be first import
+	_ "github.com/joho/godotenv/autoload"
+
 	"fmt"
 	"net/http"
 
 	"github.com/gorilla/sessions"
 	"github.com/hanchon-live/stake/src/components"
 	"github.com/hanchon-live/stake/src/components/wallet"
+	"github.com/hanchon-live/stake/src/query/database"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -18,6 +23,15 @@ const (
 )
 
 func main() {
+
+	db := database.NewDatabase()
+	validators, err := db.GetValidators("evmos")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(validators)
+
 	server := echo.New()
 	server.Static("/public/assets/", "./public/assets/")
 
