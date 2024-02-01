@@ -10,6 +10,23 @@ declare global {
   }
 }
 
+var providersTimeout: NodeJS.Timeout;
+function setProviders() {
+  clearTimeout(providersTimeout);
+  providersTimeout = setTimeout(function () {
+    const walletNames = [];
+    for (let i = 0; i < providers.length; ++i) {
+      walletNames.push(providers[i].info.name);
+    }
+    console.log(walletNames);
+    window.htmx.ajax("POST", "/wallets", {
+      target: "#walletslist",
+      swap: "innerHTML",
+      values: { providers: walletNames },
+    });
+  }, 500);
+}
+
 export async function getAddress() {
   let accounts: string[] = [];
   const p = getProvider();
@@ -18,7 +35,6 @@ export async function getAddress() {
       method: "eth_requestAccounts",
     })) as string[];
   }
-
   window.htmx.ajax("POST", "/currentwallet", {
     target: "#currentwallet",
     swap: "innerHTML",
@@ -29,17 +45,7 @@ export async function getAddress() {
 }
 
 export function onPageLoad() {
-  registerEIP6963(providers);
-  // TODO: move this to one second after page loads
-  const walletNames = [];
-  for (let i = 0; i < providers.length; ++i) {
-    walletNames.push(providers[i].info.name);
-  }
-  window.htmx.ajax("POST", "/wallets", {
-    target: "#walletslist",
-    swap: "innerHTML",
-    values: { providers: walletNames },
-  });
+  registerEIP6963(providers, setProviders);
 }
 
 export function setProviderByUUID(uuid: string) {

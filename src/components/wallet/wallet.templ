@@ -20,7 +20,7 @@ script setProviderByName(provider string) {
     window.stake.getAddress();
 }
 
-templ WalletList(providers []string) {
+templ WalletProviders(providers []string) {
 	<div class="flex flex-col space-y-2">
 		for _,v:= range providers {
 			<button class="border-2 border-black p-2 text-center" onclick={ setProviderByName(v) }>

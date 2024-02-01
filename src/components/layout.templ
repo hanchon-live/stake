@@ -8,7 +8,7 @@ templ Layout() {
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 			<script src="/public/assets/js/index.js"></script>
 		</head>
-		<body onload="a=[];window.stake.onPageLoad(a);">
+		<body onload="window.stake.onPageLoad();">
 			<main class="flex flex-col w-screen h-screen">
 				<div class="flex w-screen h-14 bg-black px-4">
 					@Wallet()

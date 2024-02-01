@@ -50,7 +50,7 @@ func main() {
 		if !ok {
 			providers = []string{}
 		}
-		return wallet.WalletList(providers).Render(c.Request().Context(), c.Response().Writer)
+		return wallet.WalletProviders(providers).Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	server.POST("/currentwallet", func(c echo.Context) error {
@@ -61,6 +61,7 @@ func main() {
 		if ok && len(account) > 0 {
 			value = account[0]
 		}
+		// TODO: this sould be a templ so it automatically escapes the string
 		return c.String(http.StatusOK, value)
 	})
 
