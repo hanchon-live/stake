@@ -93,6 +93,7 @@ func PingRest(endpoint string, c chan Endpoint) {
 	}
 
 	// Check if the tx index is enabled
+	// TODO: recipient should use the prefix of the network that we are querying
 	transactionURL := fmt.Sprintf("%scosmos/tx/v1beta1/txs?events=transfer.recipient='osmo1pmk2r32ssqwps42y3c9d4clqlca403yd05x9ye'&pagination.offset=0&pagination.limit=30", endpoint)
 	// make request
 	resp, err = Client.Get(transactionURL)

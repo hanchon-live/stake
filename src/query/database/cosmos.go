@@ -78,7 +78,7 @@ func (db Database) GetValidators(chain string) ([]types.Validator, error) {
 		return []types.Validator{}, err
 	}
 
-	db.Cache.Set(key, string(sortedValidatorsAsString), TimeoutLong)
+	db.Cache.Set(key, string(sortedValidatorsAsString), Timeout15sec)
 
 	return sortedValidators, nil
 }
@@ -202,7 +202,7 @@ func (db Database) GetAccountBalance(chain string, address string) (types.Balanc
 		return types.BalancesResponse{}, err
 	}
 
-	db.Cache.Set(key, response, TimeoutShort)
+	db.Cache.Set(key, response, Timeout15sec)
 
 	return m, nil
 }
@@ -243,7 +243,7 @@ func (db Database) GetAccountDelegations(chain string, address string) (types.De
 		return types.DelegationResponses{}, err
 	}
 
-	db.Cache.Set(key, response, TimeoutShort)
+	db.Cache.Set(key, response, Timeout15sec)
 
 	return m, nil
 }
@@ -283,7 +283,7 @@ func (db Database) GetAccountRewards(chain string, address string) (types.Reward
 		return types.RewardsResponse{}, err
 	}
 
-	db.Cache.Set(key, response, TimeoutShort)
+	db.Cache.Set(key, response, Timeout15sec)
 
 	return m, nil
 }
@@ -323,7 +323,7 @@ func (db Database) GetAccountUnbonding(chain string, address string) (types.Unbo
 		return types.UnbondingResponse{}, err
 	}
 
-	db.Cache.Set(key, response, TimeoutShort)
+	db.Cache.Set(key, response, Timeout15sec)
 
 	return m, nil
 }
@@ -362,7 +362,7 @@ func (db Database) GetProposalsTally(chain string, proposalId string) (types.Tal
 		return types.TallyResponse{}, err
 	}
 
-	db.Cache.Set(key, response, TimeoutShort)
+	db.Cache.Set(key, response, Timeout15sec)
 
 	return m, nil
 }
@@ -417,7 +417,7 @@ func (db Database) GetProposals(chain string) (types.ProposalsResponse, error) {
 		return types.ProposalsResponse{}, err
 	}
 
-	db.Cache.Set(key, string(responseWithTally), TimeoutLong)
+	db.Cache.Set(key, string(responseWithTally), Timeout30min)
 
 	return m, nil
 }
@@ -532,7 +532,7 @@ func (db Database) GetAccountTransactions(chain string, address string) (Txns, e
 		return Txns{}, err
 	}
 
-	db.Cache.Set(key, string(responseAsString), TimeoutShort)
+	db.Cache.Set(key, string(responseAsString), Timeout15sec)
 
 	return res, nil
 }

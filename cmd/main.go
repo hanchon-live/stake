@@ -25,12 +25,6 @@ const (
 func main() {
 
 	db := database.NewDatabase()
-	validators, err := db.GetValidators("evmos")
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(validators)
 
 	server := echo.New()
 	server.Static("/public/assets/", "./public/assets/")
@@ -39,7 +33,13 @@ func main() {
 	server.Use(session.Middleware(sessions.NewCookieStore([]byte(secret_key))))
 
 	server.GET("/", func(c echo.Context) error {
-		component := components.Body()
+		validators, err := db.GetValidators("evmos")
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(validators)
+		component := components.Body(validators)
 		return component.Render(c.Request().Context(), c.Response().Writer)
 	})
 

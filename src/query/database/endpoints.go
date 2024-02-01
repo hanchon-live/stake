@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	endpointFunctions "github.com/hanchon-live/stake/src/query/endpoints"
-	"github.com/hanchon-live/stake/src/query/requester"
 )
 
 func (db Database) GetWeb3Endpoint(chain string) (string, error) {
@@ -32,7 +31,7 @@ func (db Database) GetWeb3Endpoint(chain string) (string, error) {
 
 	endpointsSorted := endpointFunctions.ProcessWeb3(endpoints)
 	if len(endpointsSorted) > 0 {
-		db.Cache.Set(key, endpointsSorted[0].URL, TimeoutLong)
+		db.Cache.Set(key, endpointsSorted[0].URL, Timeout30min)
 		return endpointsSorted[0].URL, nil
 	}
 	return "", fmt.Errorf("not found")
@@ -62,7 +61,7 @@ func (db Database) GetJrpcEndpoint(chain string) (string, error) {
 	endpointsSorted := endpointFunctions.ProcessJrpc(endpoints)
 
 	if len(endpointsSorted) > 0 {
-		db.Cache.Set(key, endpointsSorted[0].URL, TimeoutLong)
+		db.Cache.Set(key, endpointsSorted[0].URL, Timeout30min)
 		return endpointsSorted[0].URL, nil
 	}
 	return "", fmt.Errorf("not found")
@@ -81,7 +80,7 @@ func (db Database) GetRestEndpoint(chain string) (string, error) {
 		return item.Value(), nil
 	}
 
-	chainInfo, err := requester.GetChain(chain)
+	chainInfo, err := db.GetChain(chain)
 	if err != nil {
 		return "", err
 	}
@@ -96,7 +95,8 @@ func (db Database) GetRestEndpoint(chain string) (string, error) {
 	}
 	endpointsSorted := endpointFunctions.ProcessRest(endpoints, standartEndpoint)
 	if len(endpointsSorted) > 0 {
-		db.Cache.Set(key, endpointsSorted[0].URL, TimeoutLong)
+		// TODO: Make this timeout 15 seconds and add a gorutine to the main to keep it up to date
+		db.Cache.Set(key, endpointsSorted[0].URL, Timeout30min)
 		return endpointsSorted[0].URL, nil
 	}
 	return "", fmt.Errorf("not found")

@@ -1,12 +1,20 @@
 package components
 
-import "github.com/hanchon-live/stake/src/components/wallet"
+import (
+	"github.com/hanchon-live/stake/src/query/types"
+	"github.com/hanchon-live/stake/src/components/wallet"
+)
 
-templ Body() {
+templ Body(val []types.Validator) {
 	@Layout() {
 		<div class="flex flex-col h-full w-full bg-red-50">
 			<div class="mx-auto my-auto">
 				@wallet.WalletConnector()
+				for _,v:= range val {
+					<div>
+						{ v.Description.Moniker }
+					</div>
+				}
 			</div>
 		</div>
 	}

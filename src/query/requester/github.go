@@ -12,7 +12,7 @@ import (
 	"github.com/hanchon-live/stake/src/query/types"
 )
 
-func QueryGithubWithCache(url string) (string, error) {
+func QueryGithub(url string) (string, error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return "", err
@@ -69,7 +69,7 @@ func GetAsset(chain string) (types.AssetList, error) {
 
 func GetJsonsFromFolder(url string, folder string) (types.File, error) {
 	// TODO: we can use t.sha to compare if the value is up to date
-	apiResp, err := QueryGithubWithCache(url)
+	apiResp, err := QueryGithub(url)
 	if err != nil {
 		return types.File{}, err
 	}
@@ -84,7 +84,7 @@ func GetJsonsFromFolder(url string, folder string) (types.File, error) {
 		if t.Mode == "100644" {
 			// Is file
 			if strings.Contains(t.Path, folder) {
-				fileResponse, err := QueryGithubWithCache(t.URL)
+				fileResponse, err := QueryGithub(t.URL)
 				if err != nil {
 					return types.File{}, err
 				}

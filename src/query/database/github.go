@@ -30,7 +30,7 @@ func (db Database) GetChain(chain string) (types.Chain, error) {
 		return types.Chain{}, err
 	}
 
-	db.Cache.Set(key, string(chainInfoAsString), TimeoutLong)
+	db.Cache.Set(key, string(chainInfoAsString), TimeoutOneDay)
 	return chainInfo, nil
 }
 
@@ -56,6 +56,6 @@ func (db Database) GetAsset(chain string) (types.AssetList, error) {
 		return types.AssetList{}, err
 	}
 
-	db.Cache.Set(key, string(assetInfoAsString), TimeoutLong)
+	db.Cache.Set(key, string(assetInfoAsString), TimeoutOneDay)
 	return assetInfo, nil
 }
