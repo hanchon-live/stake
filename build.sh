@@ -11,7 +11,7 @@ rm ./public/assets/css/*
 # Compile tailwind and update the css dependency to clear browser cache
 echo "building new css using tailwind"
 random=$RANDOM
-node ./node_modules/tailwindcss/lib/cli/index.js -i ./assets/app.css -o ./public/assets/css/app-$random.css
+node ./node_modules/tailwindcss/lib/cli/index.js -i ./assets/app.css -o ./public/assets/css/app-$random.css --minify
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i '' "s/app.css/app-$random.css/g" src/components/layout_templ.go
 else
